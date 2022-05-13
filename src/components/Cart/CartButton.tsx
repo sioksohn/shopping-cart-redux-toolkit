@@ -1,9 +1,10 @@
 import classes from "./CartButton.module.css";
 import { uiActions } from "../../store/ui-slice";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const CartButton = () => {
   const dispatch = useAppDispatch();
+  const cartQuantity = useAppSelector((state) => state.cart.totalQuantity);
 
   const toggleCartHandler = () => {
     dispatch(uiActions.toggle());
@@ -12,7 +13,7 @@ const CartButton = () => {
   return (
     <button className={classes.button} onClick={toggleCartHandler}>
       <span>My Cart</span>
-      <span className={classes.badge}>1</span>
+      <span className={classes.badge}>{cartQuantity}</span>
     </button>
   );
 };
